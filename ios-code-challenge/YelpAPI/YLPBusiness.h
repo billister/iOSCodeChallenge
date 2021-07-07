@@ -23,6 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  Name of this business.
  */
 @property (nonatomic, readonly, copy) NSString *name;
+@property (nonatomic, readonly, copy) NSArray *categories;
+@property (nonatomic, readonly, copy) NSNumber *rating;
+@property (nonatomic, readonly, copy) NSNumber *reviewCount;
+@property (nonatomic, readonly, copy) NSNumber *distance;
+@property (nonatomic, readonly, copy) NSString *thumbnailURL;
 
 @end
 
