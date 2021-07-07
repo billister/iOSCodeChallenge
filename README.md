@@ -1,3 +1,7 @@
+This is Dustin Lange's iOS Code Challenge
+
+https://github.com/dustinlange/iOS-code-challenge
+
 # iOS Code Challenge
 
 Complete the following tasks to the best of your ability. Feel free to ask questions and search the internet for help. Don't worry if you can't complete all tasks in the allowed time but think about how you would implement the task. The existing project is written in Objective-C/Swift. Please write new code in Swift.
