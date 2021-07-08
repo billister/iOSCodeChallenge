@@ -10,10 +10,19 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel?
+    @IBOutlet weak var categoriesLabel: UILabel?
+    @IBOutlet weak var ratingLabel: UILabel?
+    @IBOutlet weak var reviewCountLabel: UILabel?
+    @IBOutlet weak var priceLabel: UILabel?
+    @IBOutlet weak var thumbnailImageView: UIImageView?
+    
+    let notificationName = NSNotification.Name(rawValue: "favoriteNotification")
+    
     lazy private var favoriteBarButtonItem: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "Star-Outline"), style: .plain, target: self, action: #selector(onFavoriteBarButtonSelected(_:)))
 
-    @objc var detailItem: NSDate?
+    //need objc for collapseSecondaryViewController method in AppDelegate
+    @objc var detailItem: YLPBusiness?
     
     private var _favorite: Bool = false
     private var isFavorite: Bool {
@@ -24,20 +33,26 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureView()
         navigationItem.rightBarButtonItems = [favoriteBarButtonItem]
     }
     
     private func configureView() {
-        guard let detailItem = detailItem else { return }
-        detailDescriptionLabel.text = detailItem.description
-    }
-    
-    func setDetailItem(newDetailItem: NSDate) {
-        guard detailItem != newDetailItem else { return }
-        detailItem = newDetailItem
-        configureView()
+        guard let detailItem = detailItem else {
+            nameLabel?.text = "No Business Selection Made Yet!"
+            categoriesLabel?.text = ""
+            ratingLabel?.text = ""
+            reviewCountLabel?.text = ""
+            priceLabel?.text = ""
+            return }
+        nameLabel?.text = detailItem.name
+        categoriesLabel?.text = detailItem.categoriesString
+        ratingLabel?.text = detailItem.ratingString
+        reviewCountLabel?.text = detailItem.reviewCountString
+        priceLabel?.text = detailItem.price
+        thumbnailImageDownload(urlString: detailItem.thumbnailURL)
+        _favorite = detailItem.isFavorite
+        updateFavoriteBarButtonState()
     }
     
     private func updateFavoriteBarButtonState() {
@@ -47,5 +62,37 @@ class DetailViewController: UIViewController {
     @objc private func onFavoriteBarButtonSelected(_ sender: Any) {
         _favorite.toggle()
         updateFavoriteBarButtonState()
+        
+        guard let detailItem = detailItem else {
+            return }
+        
+        detailItem.isFavorite = isFavorite
+        NotificationCenter.default.post(name: notificationName, object: detailItem)
+    }
+    
+    func thumbnailImageDownload(urlString: String) {
+        
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        let placeholderImage = UIImage(named: "forkKnife")
+        
+        self.thumbnailImageView?.setImageWith(request, placeholderImage: placeholderImage, success: { [weak self] (request, response, image) in
+            guard let strongSelf = self else { return }
+            strongSelf.thumbnailImageView?.image = image
+        }, failure: {  [weak self] (request, response, error) in
+            guard let strongSelf = self else { return }
+            strongSelf.thumbnailImageView?.image = placeholderImage
+        })
+        
+    }
+}
+
+extension DetailViewController: BusinessSelectionDelegate {
+    func businessSelected(_ newBusiness: YLPBusiness) {
+        detailItem = newBusiness
+        configureView()
     }
 }

@@ -19,9 +19,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-    navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
+    
+    UITabBarController *leftTabController = (UITabBarController*)[splitViewController.viewControllers firstObject];
+    UINavigationController *searchNavController = (UINavigationController*)[leftTabController.viewControllers firstObject];
+    UINavigationController *favoritesNavController = (UINavigationController*)[leftTabController.viewControllers lastObject];
+    UINavigationController *rightNavController = (UINavigationController*)[splitViewController.viewControllers lastObject];
+    MasterViewController *masterController = (MasterViewController*)[searchNavController.viewControllers firstObject];
+    DetailViewController *detailController = (DetailViewController*)[rightNavController.viewControllers firstObject];
+    FavoritesTableViewController *favoritesController = (FavoritesTableViewController*)[favoritesNavController.viewControllers firstObject];
+    detailController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
+    masterController.detailDelegate = detailController;
+    favoritesController.detailDelegate = detailController;
     return YES;
 }
 

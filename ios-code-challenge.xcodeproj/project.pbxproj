@@ -17,7 +17,6 @@
 		C5CEF18E2013F25A009D1571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5CEF18D2013F25A009D1571 /* Assets.xcassets */; };
 		C5CEF1912013F25A009D1571 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5CEF18F2013F25A009D1571 /* LaunchScreen.storyboard */; };
 		C5CEF1942013F25A009D1571 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1932013F25A009D1571 /* main.m */; };
-		C5CEF19E2013F25A009D1571 /* ios_code_challengeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF19D2013F25A009D1571 /* ios_code_challengeTests.m */; };
 		C5CEF1A92013F25A009D1571 /* ios_code_challengeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1A82013F25A009D1571 /* ios_code_challengeUITests.m */; };
 		C5CEF1B92014411C009D1571 /* NXTDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1B82014411C009D1571 /* NXTDataSource.m */; };
 		C5CEF1C0201446C1009D1571 /* AFYelpAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1BF201446C1009D1571 /* AFYelpAPIClient.m */; };
@@ -29,6 +28,9 @@
 		C5CEF1D62015350A009D1571 /* NXTBusinessTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5CEF1D42015350A009D1571 /* NXTBusinessTableViewCell.xib */; };
 		C5CEF1D92015354C009D1571 /* NXTBusinessTableViewCell+YLPBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1D82015354C009D1571 /* NXTBusinessTableViewCell+YLPBusiness.m */; };
 		C5CEF1DC20153618009D1571 /* YLPBusiness+CellForObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1DB20153618009D1571 /* YLPBusiness+CellForObject.m */; };
+		F4A52A422697521300FF9010 /* ios_code_challengeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF19D2013F25A009D1571 /* ios_code_challengeTests.m */; };
+		F4A52A852697792D00FF9010 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A52A842697792D00FF9010 /* FavoritesTableViewController.swift */; };
+		F4A52A8726978C3E00FF9010 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A52A8626978C3E00FF9010 /* SpinnerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +97,8 @@
 		C5CEF1DB20153618009D1571 /* YLPBusiness+CellForObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "YLPBusiness+CellForObject.m"; sourceTree = "<group>"; };
 		E98E17AF5F4AF737558F432A /* libPods-ios-code-challenge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios-code-challenge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC3125ABF2066AA64D25CD6E /* Pods-ios-code-challengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-code-challengeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-code-challengeTests/Pods-ios-code-challengeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F4A52A842697792D00FF9010 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
+		F4A52A8626978C3E00FF9010 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		FE926015E1B4191E0337FDF0 /* libPods-ios-code-challengeUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios-code-challengeUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -232,6 +236,8 @@
 			children = (
 				8DC8B22B22A186E000CA0435 /* MasterViewController.swift */,
 				8DC8B21922A1764500CA0435 /* DetailViewController.swift */,
+				F4A52A842697792D00FF9010 /* FavoritesTableViewController.swift */,
+				F4A52A8626978C3E00FF9010 /* SpinnerView.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -463,10 +469,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5CEF1832013F25A009D1571 /* AppDelegate.m in Sources */,
+				F4A52A8726978C3E00FF9010 /* SpinnerView.swift in Sources */,
 				C5CEF1D92015354C009D1571 /* NXTBusinessTableViewCell+YLPBusiness.m in Sources */,
 				C5CEF1942013F25A009D1571 /* main.m in Sources */,
 				C5CEF1CD2014DC36009D1571 /* YLPSearch.m in Sources */,
 				C5CEF1B92014411C009D1571 /* NXTDataSource.m in Sources */,
+				F4A52A852697792D00FF9010 /* FavoritesTableViewController.swift in Sources */,
 				8DC8B22C22A186E000CA0435 /* MasterViewController.swift in Sources */,
 				C5CEF1D02014E1FD009D1571 /* YLPBusiness.m in Sources */,
 				C5CEF1D52015350A009D1571 /* NXTBusinessTableViewCell.m in Sources */,
@@ -482,7 +490,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5CEF19E2013F25A009D1571 /* ios_code_challengeTests.m in Sources */,
+				F4A52A422697521300FF9010 /* ios_code_challengeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
