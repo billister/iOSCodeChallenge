@@ -41,7 +41,7 @@
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
     formatter.maximumFractionDigits = 2;
-    formatter.roundingMode = NSNumberFormatterRoundUp;
+    formatter.roundingMode = NSNumberFormatterRoundHalfEven;
     NSString *numberString = [formatter stringFromNumber:decimalNum];
     return numberString;
 }

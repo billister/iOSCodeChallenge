@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "YLPBusiness.h"
 
 @interface ios_code_challengeTests : XCTestCase
 
@@ -24,9 +25,19 @@
     [super tearDown];
 }
 
-- (void)testExample {
+- (void)testYLPBusinessModel {
     // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+    NSDictionary *category1 = @{@"alias": @"bars", @"title": @"Bars"};
+    NSDictionary *category2 = @{@"alias": @"mexican", @"title": @"Mexican"};
+    NSArray *categoryArray = @[category1, category2];
+    
+    NSDictionary *businessDictionary = @{@"name": @"Besito Mexican Restaurant",
+                                         @"categories": categoryArray,
+                                         @"distance": @1212.6183881558743};
+    YLPBusiness *dataModel = [[YLPBusiness alloc] initWithAttributes:businessDictionary];
+    
+    XCTAssert([dataModel.categoriesString isEqual: @"Bars, Mexican"]);
+    XCTAssert([dataModel.distanceString isEqual:@"0.75 mi"]);
 }
 
 - (void)testPerformanceExample {
