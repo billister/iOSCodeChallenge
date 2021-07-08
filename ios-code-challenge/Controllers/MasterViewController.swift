@@ -44,9 +44,12 @@ class MasterViewController: UITableViewController {
         AFYelpAPIClient.shared().search(with: query, completionHandler: { [weak self] (searchResult, error) in
             guard let strongSelf = self,
                 let dataSource = strongSelf.dataSource,
-                let businesses = searchResult?.businesses else {
+                var businesses = searchResult?.businesses else {
                     return
             }
+            businesses.sort(by:{
+                $0.distance.decimalValue < $1.distance.decimalValue
+            })
             dataSource.setObjects(businesses)
             strongSelf.tableView.reloadData()
         })
