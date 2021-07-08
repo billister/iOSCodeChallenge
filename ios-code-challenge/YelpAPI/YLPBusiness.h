@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, copy) NSString *ratingString;
 @property (nonatomic, readonly, copy) NSNumber *reviewCount;
 @property (nonatomic, readonly, copy) NSString *reviewCountString;
-@property (nonatomic, readonly, copy) NSNumber *distance;
+@property (nonatomic, readonly, copy) NSNumber *distanceMiles;
 @property (nonatomic, readonly, copy) NSString *distanceString;
 @property (nonatomic, readonly, copy) NSString *thumbnailURL;
 

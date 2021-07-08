@@ -69,7 +69,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
                 return
             }
             businesses.sort(by:{
-                $0.distance.decimalValue < $1.distance.decimalValue
+                $0.distanceMiles.decimalValue < $1.distanceMiles.decimalValue
             })
             dataSource.setObjects(businesses)
             strongSelf.tableView.reloadData()
