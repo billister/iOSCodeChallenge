@@ -15,13 +15,12 @@
 
 - (void)configureCell:(YLPBusiness *)business
 {
-    [self thumbnailImageDownload:business.thumbnailURL];
-    // Business Name
     self.nameLabel.text = business.name;
-    self.categoriesLabel.text = [self categoryTitles:business.categories];
-    self.ratingLabel.text = [NSString stringWithFormat:@"Rating: %@", business.rating.stringValue];
-    self.reviewCountLabel.text = [NSString stringWithFormat:@"%@ reviews", business.reviewCount.stringValue];
-    self.distanceLabel.text = [NSString stringWithFormat:@"%@ mi", [self roundDecimalToTwoPlaces:business.distance]];
+    self.categoriesLabel.text = business.categoriesString;
+    self.ratingLabel.text = business.ratingString;
+    self.reviewCountLabel.text = business.reviewCountString;
+    self.distanceLabel.text = business.distanceString;
+    [self thumbnailImageDownload:business.thumbnailURL];
 }
 
 #pragma mark - NXTBindingDataForObjectDelegate
@@ -31,15 +30,6 @@
 }
 
 #pragma mark - helper methods
-- (NSString*)roundDecimalToTwoPlaces:(NSNumber*)decimalNum
-{
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    formatter.numberStyle = NSNumberFormatterDecimalStyle;
-    formatter.maximumFractionDigits = 2;
-    formatter.roundingMode = NSNumberFormatterRoundUp;
-    NSString *numberString = [formatter stringFromNumber:decimalNum];
-    return numberString;
-}
 
 - (void)thumbnailImageDownload:(NSString*)urlString
 {
@@ -47,30 +37,22 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     UIImage *placeholderImage = [UIImage imageNamed:@"forkKnife"];
     
+    typeof(self) __weak weakSelf = self;
     [self.thumbnailImageView setImageWithURLRequest:request
                        placeholderImage:placeholderImage
                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        self.thumbnailImageView.image = image;
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse * _Nullable response, NSError *error){
-        self.thumbnailImageView.image = placeholderImage;
-    }];
-}
-
-- (NSString*)categoryTitles:(NSArray*)tempCatArray
-{
-    NSString *returnString = @"";
-    for(NSDictionary *dict in tempCatArray) {
-        NSString *object = [dict objectForKey:@"title"];
         
-        if([returnString isEqual:@""]) {
-            returnString = object;
-        } else {
-            returnString = [NSString stringWithFormat:@"%@, %@", returnString, object];
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            strongSelf.thumbnailImageView.image = image;
         }
         
-    }
-    
-    return returnString;
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse * _Nullable response, NSError *error){
+        typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf) {
+            strongSelf.thumbnailImageView.image = placeholderImage;
+        }
+    }];
 }
 
 @end

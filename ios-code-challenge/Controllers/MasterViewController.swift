@@ -8,16 +8,29 @@
 
 import UIKit
 
+@objc protocol BusinessSelectionDelegate: AnyObject {
+  func businessSelected(_ newBusiness: YLPBusiness)
+}
+
 class MasterViewController: UITableViewController {
-    
-    var detailViewController: DetailViewController?
-    
+
+    @objc var detailDelegate: BusinessSelectionDelegate?
+
     lazy private var dataSource: NXTDataSource? = {
         guard let dataSource = NXTDataSource(objects: nil) else { return nil }
         dataSource.tableViewDidReceiveData = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.tableView.reloadData()
         }
+     
+        dataSource.tableViewDidSelectCell = { [weak self] (object) in
+            guard let strongSelf = self else { return }
+            if let detailViewController = strongSelf.detailDelegate as? DetailViewController,
+               let business = object as? YLPBusiness {
+                detailViewController.businessSelected(business)
+            }
+        }
+        
         return dataSource
     }()
 
@@ -42,20 +55,6 @@ class MasterViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController?.isCollapsed ?? false
         super.viewDidAppear(animated)
-    }
-    
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-//            guard let indexPath = tableView.indexPathForSelectedRow,
-//                let controller = segue.destination as? DetailViewController else {
-//                return
-//            }
-//            let object = objects[indexPath.row]
-//            controller.setDetailItem(newDetailItem: object)
-//            controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
-//            controller.navigationItem.leftItemsSupplementBackButton = true
-        }
     }
 
 }
