@@ -13,13 +13,15 @@ import CoreLocation
   func businessSelected(_ newBusiness: YLPBusiness)
 }
 
-class MasterViewController: UITableViewController, CLLocationManagerDelegate {
+class MasterViewController: UITableViewController, CLLocationManagerDelegate, UISearchResultsUpdating {
 
     //@objc so the ObjC appDelegate can set this
     @objc var detailDelegate: BusinessSelectionDelegate?
     var locationManager: CLLocationManager?
     var latitude: CLLocationDegrees?
     var longitude: CLLocationDegrees?
+    let searchController = UISearchController()
+    var allBusinesses: [YLPBusiness]?
 
     lazy private var dataSource: NXTDataSource? = {
         guard let dataSource = NXTDataSource(objects: nil) else { return nil }
@@ -48,6 +50,9 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
+        
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,9 +76,27 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate {
             businesses.sort(by:{
                 $0.distanceMiles.decimalValue < $1.distanceMiles.decimalValue
             })
+            strongSelf.allBusinesses = businesses
             dataSource.setObjects(businesses)
             strongSelf.tableView.reloadData()
         })
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+        
+        var filteredBusinesses = allBusinesses?.filter({
+            $0.name.contains(text) || $0.categoriesString.contains(text)
+        })
+        
+        if text.isEmpty {
+            filteredBusinesses = allBusinesses
+        }
+    
+        dataSource?.setObjects(filteredBusinesses)
+        tableView.reloadData()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
