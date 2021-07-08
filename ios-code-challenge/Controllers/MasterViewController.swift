@@ -25,6 +25,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate, UI
     let limit: NSNumber = 50
     var fetchingMoreBusinesses = false
     let notificationName = NSNotification.Name(rawValue: "favoriteNotification")
+    var spinnerView = SpinnerView()
     
     lazy private var dataSource: NXTDataSource? = {
         guard let dataSource = NXTDataSource(objects: nil) else { return nil }
@@ -76,11 +77,15 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate, UI
     override func viewDidAppear(_ animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController?.isCollapsed ?? false
         super.viewDidAppear(animated)
+
+        spinnerView = SpinnerView(frame: CGRect(x: view.frame.midX, y: 40, width: 60, height: 60))
+        view.addSubview(spinnerView)
+        spinnerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     //MARK: Query & Yelp Service Call Methods
     func fetchNextBusinesses(offset: NSNumber) {
-        
+        spinnerView.startSpinner()
         guard let newLatitude = latitude, let newLongitude = longitude else {
             return
         }
@@ -104,6 +109,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate, UI
             dataSource.setObjects(strongSelf.allBusinesses)
             strongSelf.tableView.reloadData()
             strongSelf.fetchingMoreBusinesses = false
+            strongSelf.spinnerView.stopSpinner()
         })
     }
     

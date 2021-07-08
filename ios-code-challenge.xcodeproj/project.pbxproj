@@ -30,6 +30,7 @@
 		C5CEF1DC20153618009D1571 /* YLPBusiness+CellForObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1DB20153618009D1571 /* YLPBusiness+CellForObject.m */; };
 		F4A52A422697521300FF9010 /* ios_code_challengeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF19D2013F25A009D1571 /* ios_code_challengeTests.m */; };
 		F4A52A852697792D00FF9010 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A52A842697792D00FF9010 /* FavoritesTableViewController.swift */; };
+		F4A52A8726978C3E00FF9010 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A52A8626978C3E00FF9010 /* SpinnerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		E98E17AF5F4AF737558F432A /* libPods-ios-code-challenge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios-code-challenge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC3125ABF2066AA64D25CD6E /* Pods-ios-code-challengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-code-challengeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-code-challengeTests/Pods-ios-code-challengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F4A52A842697792D00FF9010 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
+		F4A52A8626978C3E00FF9010 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		FE926015E1B4191E0337FDF0 /* libPods-ios-code-challengeUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios-code-challengeUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -235,6 +237,7 @@
 				8DC8B22B22A186E000CA0435 /* MasterViewController.swift */,
 				8DC8B21922A1764500CA0435 /* DetailViewController.swift */,
 				F4A52A842697792D00FF9010 /* FavoritesTableViewController.swift */,
+				F4A52A8626978C3E00FF9010 /* SpinnerView.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5CEF1832013F25A009D1571 /* AppDelegate.m in Sources */,
+				F4A52A8726978C3E00FF9010 /* SpinnerView.swift in Sources */,
 				C5CEF1D92015354C009D1571 /* NXTBusinessTableViewCell+YLPBusiness.m in Sources */,
 				C5CEF1942013F25A009D1571 /* main.m in Sources */,
 				C5CEF1CD2014DC36009D1571 /* YLPSearch.m in Sources */,
