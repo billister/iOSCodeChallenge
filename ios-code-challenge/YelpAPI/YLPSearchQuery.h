@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithLocation:(NSString *)location;
 
-- (instancetype)initWithLatitude:(NSNumber *)latitude andLongitude:(NSNumber*)longitude;
+- (instancetype)initWithLatitude:(NSNumber *)latitude Longitude:(NSNumber*)longitude Limit:(NSNumber*)limit Offset:(NSNumber*)offset;
 
 - (NSDictionary *)parameters;
 

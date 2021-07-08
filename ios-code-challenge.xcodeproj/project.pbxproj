@@ -17,7 +17,6 @@
 		C5CEF18E2013F25A009D1571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5CEF18D2013F25A009D1571 /* Assets.xcassets */; };
 		C5CEF1912013F25A009D1571 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5CEF18F2013F25A009D1571 /* LaunchScreen.storyboard */; };
 		C5CEF1942013F25A009D1571 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1932013F25A009D1571 /* main.m */; };
-		C5CEF19E2013F25A009D1571 /* ios_code_challengeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF19D2013F25A009D1571 /* ios_code_challengeTests.m */; };
 		C5CEF1A92013F25A009D1571 /* ios_code_challengeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1A82013F25A009D1571 /* ios_code_challengeUITests.m */; };
 		C5CEF1B92014411C009D1571 /* NXTDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1B82014411C009D1571 /* NXTDataSource.m */; };
 		C5CEF1C0201446C1009D1571 /* AFYelpAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1BF201446C1009D1571 /* AFYelpAPIClient.m */; };
@@ -29,6 +28,7 @@
 		C5CEF1D62015350A009D1571 /* NXTBusinessTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5CEF1D42015350A009D1571 /* NXTBusinessTableViewCell.xib */; };
 		C5CEF1D92015354C009D1571 /* NXTBusinessTableViewCell+YLPBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1D82015354C009D1571 /* NXTBusinessTableViewCell+YLPBusiness.m */; };
 		C5CEF1DC20153618009D1571 /* YLPBusiness+CellForObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1DB20153618009D1571 /* YLPBusiness+CellForObject.m */; };
+		F4A52A422697521300FF9010 /* ios_code_challengeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF19D2013F25A009D1571 /* ios_code_challengeTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -482,7 +482,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5CEF19E2013F25A009D1571 /* ios_code_challengeTests.m in Sources */,
+				F4A52A422697521300FF9010 /* ios_code_challengeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

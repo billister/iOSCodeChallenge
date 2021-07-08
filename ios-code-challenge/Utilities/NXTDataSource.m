@@ -68,6 +68,10 @@
         
         [cell willDisplayCellForObject:object];
     }
+    
+    if(self.checkLastCellForPagination) {
+        self.checkLastCellForPagination([NSNumber numberWithInteger: indexPath.row]);
+    }
 }
     
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

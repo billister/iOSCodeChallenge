@@ -13,6 +13,8 @@
 @property (nonatomic, copy) NSString *location;
 @property (nonatomic, copy) NSNumber *latitude;
 @property (nonatomic, copy) NSNumber *longitude;
+@property (nonatomic, copy) NSNumber *limit;
+@property (nonatomic, copy) NSNumber *offset;
 
 @end
 
@@ -27,11 +29,13 @@
     return self;
 }
 
-- (instancetype)initWithLatitude:(NSNumber *)latitude andLongitude:(NSNumber*)longitude {
+- (instancetype)initWithLatitude:(NSNumber *)latitude Longitude:(NSNumber*)longitude Limit:(NSNumber*)limit Offset:(NSNumber*)offset {
     
     if(self = [super init]) {
         _latitude = latitude;
         _longitude = longitude;
+        _limit = limit;
+        _offset = offset;
     }
     
     return self;
@@ -63,6 +67,14 @@
     
     if(self.categoryFilter != nil && self.categoryFilter.count > 0) {
         params[@"categories"] = [self.categoryFilter componentsJoinedByString:@","];
+    }
+    
+    if(self.limit) {
+        params[@"limit"] = self.limit;
+    }
+    
+    if(self.offset) {
+        params[@"offset"] = self.offset;
     }
     
     return params;

@@ -22,7 +22,9 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate, UI
     var longitude: CLLocationDegrees?
     let searchController = UISearchController()
     var allBusinesses: [YLPBusiness]?
-
+    let limit: NSNumber = 50
+    var fetchingMoreBusinesses = false
+    
     lazy private var dataSource: NXTDataSource? = {
         guard let dataSource = NXTDataSource(objects: nil) else { return nil }
         dataSource.tableViewDidReceiveData = { [weak self] in
@@ -38,9 +40,20 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate, UI
             }
         }
         
+        dataSource.checkLastCellForPagination = { [weak self] (row) in
+            guard let strongSelf = self, let tableRow = row else { return }
+            let businessCount = strongSelf.allBusinesses?.count ?? 0
+            let rowOffset = tableRow.intValue + 1
+            if rowOffset >= businessCount && !strongSelf.fetchingMoreBusinesses {
+                strongSelf.fetchingMoreBusinesses = true
+                strongSelf.fetchNextBusinesses(offset: NSNumber(integerLiteral: rowOffset))
+            }
+        }
+        
         return dataSource
     }()
 
+    //MARK: Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +66,8 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate, UI
         
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
+        
+        allBusinesses = [YLPBusiness]()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,25 +75,32 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate, UI
         super.viewDidAppear(animated)
     }
     
-    func locationWasUpdated() {
+    //MARK: Query & Yelp Service Call Methods
+    func fetchNextBusinesses(offset: NSNumber) {
         
         guard let newLatitude = latitude, let newLongitude = longitude else {
             return
         }
         
-        let query = YLPSearchQuery(latitude: NSNumber(value: newLatitude), andLongitude: NSNumber(value: newLongitude))
+        let query = YLPSearchQuery(latitude: NSNumber(value: newLatitude), longitude: NSNumber(value: newLongitude), limit: limit, offset: offset)
+
+        callYelpService(query: query)
+    }
+    
+    func callYelpService(query: YLPSearchQuery) {
         AFYelpAPIClient.shared().search(with: query, completionHandler: { [weak self] (searchResult, error) in
             guard let strongSelf = self,
                   let dataSource = strongSelf.dataSource,
-                  var businesses = searchResult?.businesses else {
+                  let businesses = searchResult?.businesses else {
                 return
             }
-            businesses.sort(by:{
+            strongSelf.allBusinesses?.append(contentsOf: businesses)
+            strongSelf.allBusinesses?.sort(by:{
                 $0.distanceMiles.decimalValue < $1.distanceMiles.decimalValue
             })
-            strongSelf.allBusinesses = businesses
-            dataSource.setObjects(businesses)
+            dataSource.setObjects(strongSelf.allBusinesses)
             strongSelf.tableView.reloadData()
+            strongSelf.fetchingMoreBusinesses = false
         })
     }
     
@@ -99,6 +121,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate, UI
         tableView.reloadData()
     }
     
+    //MARK: Location Manager Methods
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways || status == .authorizedWhenInUse {
             locationManager?.requestLocation()
@@ -111,7 +134,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate, UI
         }
         latitude = location.coordinate.latitude
         longitude = location.coordinate.longitude
-        locationWasUpdated()
+        fetchNextBusinesses(offset: 0)
         locationManager?.stopUpdatingLocation()
     }
     
