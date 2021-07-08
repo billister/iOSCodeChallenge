@@ -24,6 +24,7 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate, UI
     var allBusinesses: [YLPBusiness]?
     let limit: NSNumber = 50
     var fetchingMoreBusinesses = false
+    let notificationName = NSNotification.Name(rawValue: "favoriteNotification")
     
     lazy private var dataSource: NXTDataSource? = {
         guard let dataSource = NXTDataSource(objects: nil) else { return nil }
@@ -68,6 +69,8 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate, UI
         navigationItem.searchController = searchController
         
         allBusinesses = [YLPBusiness]()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(markOrRemoveFavorite(notification:)), name: notificationName, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -140,5 +143,15 @@ class MasterViewController: UITableViewController, CLLocationManagerDelegate, UI
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationManager?.stopUpdatingLocation()
+    }
+    
+    //MARK: Notification named favoriteNotification Methods
+    @objc func markOrRemoveFavorite(notification: NSNotification) {
+        guard let business = notification.object as? YLPBusiness else {
+            return
+        }
+        let businessToUpdate = allBusinesses?.first(where: {
+                                                $0.identifier == business.identifier })
+        businessToUpdate?.isFavorite = business.isFavorite
     }
 }

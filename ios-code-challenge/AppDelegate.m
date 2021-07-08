@@ -21,13 +21,16 @@
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
     
     UITabBarController *leftTabController = (UITabBarController*)[splitViewController.viewControllers firstObject];
-    UINavigationController *leftNavController = (UINavigationController*)[leftTabController.viewControllers firstObject];
+    UINavigationController *searchNavController = (UINavigationController*)[leftTabController.viewControllers firstObject];
+    UINavigationController *favoritesNavController = (UINavigationController*)[leftTabController.viewControllers lastObject];
     UINavigationController *rightNavController = (UINavigationController*)[splitViewController.viewControllers lastObject];
-    MasterViewController *masterController = (MasterViewController*)[leftNavController.viewControllers firstObject];
+    MasterViewController *masterController = (MasterViewController*)[searchNavController.viewControllers firstObject];
     DetailViewController *detailController = (DetailViewController*)[rightNavController.viewControllers firstObject];
+    FavoritesTableViewController *favoritesController = (FavoritesTableViewController*)[favoritesNavController.viewControllers firstObject];
     detailController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
     masterController.detailDelegate = detailController;
+    favoritesController.detailDelegate = detailController;
     return YES;
 }
 

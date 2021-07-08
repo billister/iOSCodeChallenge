@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, copy) NSNumber *distanceMiles;
 @property (nonatomic, readonly, copy) NSString *distanceString;
 @property (nonatomic, readonly, copy) NSString *thumbnailURL;
+@property (nonatomic, assign) BOOL isFavorite;
 
 @end
 

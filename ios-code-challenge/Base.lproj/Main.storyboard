@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -121,17 +122,18 @@
                     </tabBar>
                     <connections>
                         <segue destination="X7v-MK-p8O" kind="relationship" relationship="viewControllers" id="IcA-Yh-5If"/>
+                        <segue destination="DIh-xo-ghF" kind="relationship" relationship="viewControllers" id="w6b-GC-Vyl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRi-Jn-gTO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-279" y="-663"/>
         </scene>
-        <!--Item-->
+        <!--Search-->
         <scene sceneID="G3f-HU-qnS">
             <objects>
                 <navigationController id="X7v-MK-p8O" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="8Ql-83-dlh"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="8Ql-83-dlh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VN3-5e-Lnw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -143,6 +145,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKy-sh-oNA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="514" y="-671"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="PDO-FV-xPp">
+            <objects>
+                <tableViewController id="MX8-dF-pgX" customClass="FavoritesTableViewController" customModule="ios_code_challenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mm8-TW-A64">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="KU1-5n-sBg" style="IBUITableViewCellStyleDefault" id="vYJ-Rd-cWo">
+                                <rect key="frame" x="0.0" y="24.5" width="375" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vYJ-Rd-cWo" id="ddM-5f-g2v">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KU1-5n-sBg">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MX8-dF-pgX" id="8gg-sI-zNZ"/>
+                            <outlet property="delegate" destination="MX8-dF-pgX" id="PpT-yV-IXB"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Favorites" selectedImage="Star-Filled" id="SGC-2p-2rs"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="rhs-bg-jtl"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dIE-3S-X9e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1318" y="-1432"/>
         </scene>
         <!--Search-->
         <scene sceneID="smW-Zh-WAh">
@@ -202,10 +244,34 @@
             </objects>
             <point key="canvasLocation" x="-279" y="14"/>
         </scene>
+        <!--Favorites-->
+        <scene sceneID="Tgu-Px-SAg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DIh-xo-ghF" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorites" image="Star-Filled" id="1he-1E-a0E"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VOr-Pt-9k8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MX8-dF-pgX" kind="relationship" relationship="rootViewController" id="Vpy-uM-6Wi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AJd-Z3-7VA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="502" y="-1431"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Star-Filled" width="22" height="21"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
